@@ -271,17 +271,18 @@ p {
 }
 
 .--btn {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 400;
   padding: 6px 8px;
   margin: 0 5px 0 0;
   border: 1px solid transparent;
-  border-radius: 3px;
+  border-radius: 10px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: all 0.3s;
+  font-family: "Source Sans 3", sans-serif;
 }
 
 .--btn:hover {
@@ -307,7 +308,10 @@ p {
 }
 .--btn-danger {
   color: #fff;
-  background: orangered;
+  background: #ed2d2f;
+}
+.--btn-proceed {
+  font-weight: 800;
 }
 
 .--btn-success {

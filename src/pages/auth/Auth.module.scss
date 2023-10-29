@@ -9,7 +9,7 @@
   }
 
   .form {
-    width: 35rem;
+    width: 30rem;
     padding: 1.5rem;
     animation: slide-up 0.5s ease;
     h2 {
@@ -21,13 +21,13 @@
       input[type="email"],
       input[type="password"] {
         display: block;
-        font-size: 1.6rem;
-        font-weight: 300;
-        padding: 1rem;
+        font-size: 1rem;
+        font-weight: 400;
+        padding: 0.9rem;
         margin: 1rem auto;
         width: 100%;
         border: 1px solid #777;
-        border-radius: 3px;
+        border-radius: 10px;
         outline: none;
       }
       .links {
@@ -71,4 +71,31 @@
   .img {
     display: none;
   }
+}
+
+.button-div {
+  width: 100%;
+  display: flex;
+
+  a {
+    cursor: pointer;
+    flex: 1;
+    text-transform: uppercase;
+    color: var(--color-dark);
+    padding: 7px;
+    width: 100%;
+    text-align: center;
+    border: 1px solid var(--color-grey);
+    &.active {
+      color: white;
+      background-color: var(--color-purple);
+    }
+  }
+}
+
+.login-heading {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 16px;
+  font-weight: 600;
 }
