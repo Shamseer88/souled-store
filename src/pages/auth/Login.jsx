@@ -20,7 +20,15 @@ const Login = () => {
               Register
             </NavLink>
           </div>
+          <button
+            className="--btn --btn-primary --btn-block --btn-proceed"
+            style={{ marginTop: "10px" }}
+          >
+            <FaGoogle color="#fff" />
+            &nbsp; Login With Google
+          </button>
           <form>
+            <p>-- OR --</p>
             <input type="text" placeholder="Email" required />
             <input type="password" placeholder="Password" required />
             <button className="--btn --btn-danger --btn-block --btn-proceed">
@@ -29,12 +37,7 @@ const Login = () => {
             <div className={styles.links}>
               <Link to="/reset-password">Reset Password</Link>
             </div>
-            <p>-- or --</p>
           </form>
-          <button className="--btn --btn-primary --btn-block --btn-proceed">
-            <FaGoogle color="#fff" />
-            &nbsp; Login With Google
-          </button>
         </div>
       </Card>
     </section>
