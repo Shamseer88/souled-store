@@ -2,10 +2,13 @@ import { Link, NavLink } from "react-router-dom";
 import styles from "./Auth.module.scss";
 import { FaGoogle } from "react-icons/fa";
 import Card from "../../components/card/Card";
+import { useState } from "react";
 
 const activeLink = ({ isActive }) => (isActive ? `${styles.active}` : "");
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <section className={`container ${styles.auth}`}>
       <Card>
@@ -29,13 +32,28 @@ const Login = () => {
           </button>
           <form>
             <p>-- OR --</p>
-            <input type="text" placeholder="Email" required />
-            <input type="password" placeholder="Password" required />
-            <button className="--btn --btn-danger --btn-block --btn-proceed">
+            <input
+              type="text"
+              placeholder="Email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button
+              type="submit"
+              className="--btn --btn-danger --btn-block --btn-proceed"
+            >
               PROCEED
             </button>
             <div className={styles.links}>
-              <Link to="/reset-password">Reset Password</Link>
+              <Link to="/password-reset">Reset Password</Link>
             </div>
           </form>
         </div>
