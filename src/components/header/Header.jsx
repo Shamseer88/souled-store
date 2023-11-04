@@ -1,9 +1,13 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import styles from "./Header.module.scss";
 import { FaMobileAlt, FaTimes } from "react-icons/fa";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { AiOutlineUser } from "react-icons/ai";
 import { useState } from "react";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase/config";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const logo = (
   <div className={styles.logo}>
@@ -27,6 +31,8 @@ const activeLink = ({ isActive }) => (isActive ? `${styles.active}` : "");
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
 
+  const navigate = useNavigate();
+
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
@@ -35,67 +41,83 @@ const Header = () => {
     setShowMenu(false);
   };
 
+  const logoutUser = () => {
+    signOut(auth)
+      .then(() => {
+        toast.success("Logout Successfully.");
+        navigate("/");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+
   return (
-    <header>
-      <div className={styles.header}>
-        {logo}
+    <>
+      <header>
+        <div className={styles.header}>
+          {logo}
 
-        <nav
-          className={
-            showMenu ? `${styles["show-nav"]}` : `${styles["hide-nav"]}`
-          }
-        >
-          <div
+          <nav
             className={
-              showMenu
-                ? `${styles["nav-wrapper"]} ${styles["show-nav-wrapper"]}`
-                : `${styles["nav-wrapper"]}`
+              showMenu ? `${styles["show-nav"]}` : `${styles["hide-nav"]}`
             }
-            onClick={hideMenu}
-          ></div>
-          <ul onClick={hideMenu}>
-            <li className={styles["logo-mobile"]}>
-              {logo}
-              <FaTimes size={22} color="#fff" onClick={hideMenu} />
-            </li>
-            <li>
-              <NavLink to="/men" className={activeLink}>
-                MEN
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/women" className={activeLink}>
-                WOMEN
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/kids" className={activeLink}>
-                KIDS
-              </NavLink>
-            </li>
-          </ul>
-          <div className={styles["header-right"]} onClick={hideMenu}>
-            <span className={styles.links}>
-              <NavLink to="/order-history" className={activeLink}>
-                Track Order
-              </NavLink>
-              <NavLink to="/contact" className={activeLink}>
-                Contact Us
-              </NavLink>
-              <NavLink to="/login">
-                <AiOutlineUser />
-              </NavLink>
-            </span>
-            {downloadAppLink}
-          </div>
-        </nav>
+          >
+            <div
+              className={
+                showMenu
+                  ? `${styles["nav-wrapper"]} ${styles["show-nav-wrapper"]}`
+                  : `${styles["nav-wrapper"]}`
+              }
+              onClick={hideMenu}
+            ></div>
+            <ul onClick={hideMenu}>
+              <li className={styles["logo-mobile"]}>
+                {logo}
+                <FaTimes size={22} color="#fff" onClick={hideMenu} />
+              </li>
+              <li>
+                <NavLink to="/men" className={activeLink}>
+                  MEN
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/women" className={activeLink}>
+                  WOMEN
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/kids" className={activeLink}>
+                  KIDS
+                </NavLink>
+              </li>
+            </ul>
+            <div className={styles["header-right"]} onClick={hideMenu}>
+              <span className={styles.links}>
+                <NavLink to="/order-history" className={activeLink}>
+                  Track Order
+                </NavLink>
+                <NavLink to="/contact" className={activeLink}>
+                  Contact Us
+                </NavLink>
+                <NavLink to="/login">
+                  <AiOutlineUser />
+                </NavLink>
+                <NavLink to="/" onClick={logoutUser}>
+                  Logout
+                </NavLink>
+              </span>
+              {downloadAppLink}
+            </div>
+          </nav>
 
-        <div className={styles["menu-icon"]}>
-          {downloadAppLink}
-          <HiOutlineMenuAlt3 size={28} onClick={toggleMenu} />
+          <div className={styles["menu-icon"]}>
+            {downloadAppLink}
+            <HiOutlineMenuAlt3 size={28} onClick={toggleMenu} />
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+    </>
   );
 };
 

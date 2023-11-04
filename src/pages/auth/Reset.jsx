@@ -2,10 +2,12 @@ import { Link, NavLink } from "react-router-dom";
 import Card from "../../components/card/Card";
 import styles from "./Auth.module.scss";
 import { FaGoogle } from "react-icons/fa";
+import { useState } from "react";
 
 const activeLink = ({ isActive }) => (isActive ? `${styles.active}` : "");
 
 const Reset = () => {
+  const [email, setEmail] = useState("");
   return (
     <section className={`container ${styles.auth}`}>
       <Card>

@@ -11,11 +11,14 @@ import OrderHistory from "./pages/orderHistory/OrderHistory";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Reset from "./pages/auth/Reset";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
     <>
       <BrowserRouter>
+        <ToastContainer />
         <Header />
         <Routes>
           <Route path="/" element={<Men />} />

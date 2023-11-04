@@ -3,7 +3,7 @@ import Card from "../../components/card/Card";
 import styles from "./Auth.module.scss";
 import { FaGoogle } from "react-icons/fa";
 import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { auth } from "../../firebase/config";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -23,6 +23,7 @@ const Register = () => {
     e.preventDefault();
     if (password !== confirmPassword) {
       toast.error("Passwords do not match.");
+      return;
     }
     setIsLoading(true);
     createUserWithEmailAndPassword(auth, email, password)
@@ -41,7 +42,6 @@ const Register = () => {
 
   return (
     <>
-      <ToastContainer />
       {isLoading && <Loader />}
       <section className={`container ${styles.auth}`}>
         <Card>
